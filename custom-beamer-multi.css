@@ -1,4 +1,4 @@
-/* @theme custom-beamer-split */
+/* @theme custom-beamer-multi */
 /* 1) beamer.css を先に読み込み（ビジュアルベース） */  
 @import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css"; :contentReference[oaicite:0]{index=0}  
 /* 2) default テーマを継承（レイアウト基盤） */  
