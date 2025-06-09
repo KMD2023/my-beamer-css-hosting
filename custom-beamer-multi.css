@@ -1,51 +1,36 @@
-/* @theme split-only */
-/* 1) デフォルトテーマを読み込む */
-@import 'default';  /* Marp のベースレイアウトを継承 :contentReference[oaicite:4]{index=4} */
+/* @theme split-and-multi */
+/* 1) Marp のベースレイアウトを読み込む */
+@import 'default';
 
-/* 2) スライド全体を Block にリセット */
-section {
-  display: block !important;  /* デフォルトの Flexbox を解除 :contentReference[oaicite:5]{index=5} */
-  margin: 0; padding: 0;
-}
+/* ──────────────────────────────────────────
+   2) 分割／多段レイアウト用ユーティリティクラス
+────────────────────────────────────────── */
 
-/* ===============================
-   ■ 左右二分割（Horizontal Split）
-   =============================== */
-section.split-hr {
-  display: grid !important;  
-  grid-template-columns: 1fr 1fr !important;  /* 左右に 50%ずつ配置 :contentReference[oaicite:6]{index=6} */
-  gap: 1em !important;                         /* セル間の余白 */
-  width: 100%; height: 100%;
+/* flex コンテナ化＆ギャップ */
+:root {
+  --fw: 1;
 }
-section.split-hr > * {
-  box-sizing: border-box;
-  padding: 1em;
+section .flex {
+  display: flex !important;       /* Flexbox 有効化 */
+  gap: 1em !important;            /* 子要素間ギャップ */
 }
 
-/* ===============================
-   ■ 上下二分割（Vertical Split）
-   =============================== */
-section.split-vr {
-  display: grid !important;  
-  grid-template-rows: 1fr 1fr !important;     /* 上下に 50%ずつ配置 :contentReference[oaicite:7]{index=7} */
-  gap: 1em !important;
-  width: 100%; height: 100%;
+/* space-around（sa）＝余白を両端に配置 */
+section .sa {
+  justify-content: space-around !important;  /* 子要素を均等配置 :contentReference[oaicite:5]{index=5} */
 }
-section.split-vr > * {
-  box-sizing: border-box;
-  padding: 1em;
+/* space-between（sb）＝子要素を両端寄せ */
+section .sb {
+  justify-content: space-between !important; /* 子要素を両端揃え :contentReference[oaicite:6]{index=6} */
 }
 
-/* ===============================
-   ■ 四分割（2×2 Quad Split）
-   =============================== */
-section.split-quad {
-  display: grid !important;  
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr) !important;  /* 2行×2列のグリッド :contentReference[oaicite:8]{index=8} */
-  gap: 1em !important;
-  width: 100%; height: 100%;
+/* flex ウェイト指定（fw） */
+section .fw div {
+  flex: var(--fw) !important;     /* --fw で幅の比率を指定 :contentReference[oaicite:7]{index=7} */
 }
-section.split-quad > * {
-  box-sizing: border-box;
-  padding: 1em;
+
+/* 子要素のマージン調整 */
+section .sa div,
+section .sb div {
+  margin: 0.1em !important;       /* 子要素間を若干だけ開ける :contentReference[oaicite:8]{index=8} */
 }
