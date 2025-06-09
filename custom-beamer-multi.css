@@ -1,0 +1,90 @@
+/* @theme custom-beamer-multi */
+/* ベースに beamer.css を読み込む */
+@import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css"; /* :contentReference[oaicite:0]{index=0} */
+
+/* ===========================================
+   ■ 多段組みレイアウト用クラス定義
+   =========================================== */
+
+/* Flexbox を用いた 2 列レイアウト */
+section.columns {
+  display: flex;                                        /* フレックスコンテナ化 :contentReference[oaicite:1]{index=1} */
+  flex-wrap: wrap;                                      /* 折り返し許可 :contentReference[oaicite:2]{index=2} */
+  gap: 1em;                                             /* 列間ギャップ :contentReference[oaicite:3]{index=3} */
+}
+section.columns > * {
+  flex: 1 1 48%;                                        /* 最小幅 48%、余剰幅は均等配分 :contentReference[oaicite:4]{index=4} */
+  box-sizing: border-box;
+  padding: 0.5em;
+}
+
+/* CSS Grid を用いた自動多段組みレイアウト（レスポンシブ対応） */
+section.grid-columns {
+  display: grid;                                        /* グリッドコンテナ化 :contentReference[oaicite:5]{index=5} */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自動列数・最小 200px、最大 1fr :contentReference[oaicite:6]{index=6} :contentReference[oaicite:7]{index=7} */
+  grid-auto-rows: auto;                                 /* 行の高さをコンテンツに合わせる :contentReference[oaicite:8]{index=8} */
+  gap: 1em;
+  padding: 0.5em;
+}
+
+/* Qiita などで紹介されている float ベースの 2 列例（リストの多段） */
+section.toc>ul ul>li {
+  width: 45%;                                           /* 幅を半分弱に設定 :contentReference[oaicite:9]{index=9} */
+  float: left;                                          /* 左寄せフロート :contentReference[oaicite:10]{index=10} */
+  clear: left;                                          /* 前列のフロートをクリア :contentReference[oaicite:11]{index=11} */
+}
+section.toc>ul ul>li:nth-child(n+6) {
+  position: relative;
+  top: -11em;                                           /* 6 個目以降を上にずらして列を揃える :contentReference[oaicite:12]{index=12} */
+  left: 50%;                                            /* 2 列目に移動 :contentReference[oaicite:13]{index=13} */
+}
+
+/* ===========================================
+   ■ 必要に応じて組版調整
+   =========================================== */
+
+/* 例：columns クラス内の見出し・段落の余白調整 */
+section.columns h2,
+section.grid-columns h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+/* 例：小さな文字用クラス（参考: beamer.css の tinytext） */
+section.tinytext>p,
+section.tinytext>ul,
+section.tinytext>blockquote {
+  font-size: 0.65em;
+}
+
+/* ===========================================
+   ■ 使い方
+   =========================================== */
+/*
+Markdown の先頭に以下を記述：
+
+---
+marp: true
+theme: custom-beamer-multi
+paginate: true
+---
+
+# Flexbox 2 列例
+
+<!-- _class: columns -->
+## 左側
+- アイテム1
+- アイテム2
+
+## 右側
+- アイテムA
+- アイテムB
+
+# Grid レイアウト例
+
+<!-- _class: grid-columns -->
+- コンテンツ1
+- コンテンツ2
+- コンテンツ3
+- コンテンツ4
+*/
