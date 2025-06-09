@@ -1,24 +1,26 @@
-/* @theme custom-beamer-multi */
-/* 1) beamer.css を最初に読み込む（ビジュアル基盤） */
-@import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css";
+/* 1) テーマ名を最初に宣言 */
+ /* @theme custom-beamer-split */
 
-/* 2) default テーマを次に読み込む（レイアウト基盤） */
-@import 'default';
+/* 2) beamer.css を読み込み（ビジュアル基盤） */
+@import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css"; :contentReference[oaicite:4]{index=4}
 
-/* ====================================================
-   ■ 分割レイアウト用ユーティリティ（テーマクラス指定）
-   ==================================================== */
+/* 3) default テーマを次に読み込み（レイアウト基盤） */
+@import 'default'; :contentReference[oaicite:5]{index=5}
+
+/* ===============================
+   分割レイアウト用ユーティリティ
+   =============================== */
 
 /* 左右分割 */
 .marp-theme-beam section.split-horizontal,
 .marp-theme-custom-beamer-split section.split-horizontal {
-  display: flex !important;        /* Flexbox 有効化 */  
-  flex-direction: row !important;  /* 横方向 */  
-  width: 100%; height: 100%;       /* 全体を覆う */  
+  display: flex !important;        /* 横方向フレックスレイアウト */  
+  flex-direction: row !important;  /* 左右に並べる */  
+  width: 100%; height: 100%;       /* スライド全体を覆う */  
 }
 .marp-theme-beam section.split-horizontal > *,
 .marp-theme-custom-beamer-split section.split-horizontal > * {
-  flex: 1 1 50% !important;        /* 左右それぞれ半分 */  
+  flex: 1 1 50% !important;        /* 左右半分ずつ */  
   box-sizing: border-box;  
   padding: 1em;  
 }
@@ -26,22 +28,22 @@
 /* 上下分割 */
 .marp-theme-beam section.split-vertical,
 .marp-theme-custom-beamer-split section.split-vertical {
-  display: flex !important;  
-  flex-direction: column !important;  /* 縦方向 */  
+  display: flex !important;        /* 縦方向フレックスレイアウト */  
+  flex-direction: column !important;  
   width: 100%; height: 100%;  
 }
 .marp-theme-beam section.split-vertical > *,
 .marp-theme-custom-beamer-split section.split-vertical > * {
-  flex: 1 1 50% !important;        /* 上下それぞれ半分 */  
+  flex: 1 1 50% !important;        /* 上下半分ずつ */  
   box-sizing: border-box;  
   padding: 1em;  
 }
 
-/* 四分割 */
+/* 四分割 (2×2) */
 .marp-theme-beam section.split-quad,
 .marp-theme-custom-beamer-split section.split-quad {
   display: grid !important;  
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr) !important;  /* 2×2 */  
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr) !important;  /* 2 行×2 列のグリッド */  
   width: 100%; height: 100%;  
   gap: 1em !important;           /* セル間ギャップ */  
 }
@@ -51,11 +53,11 @@
   padding: 1em;  
 }
 
-/* ====================================================
-   ■ 既存 columns/grid 定義の優先度強化
-   ==================================================== */
+/* ===============================
+   従来の columns/grid 定義を強化
+   =============================== */
 
-/* Flexbox 2 列 */
+/* Flexbox 2 列 (columns) */
 .marp-theme-beam section.columns,
 .marp-theme-custom-beamer-split section.columns {
   display: flex !important;  
@@ -69,11 +71,11 @@
   padding: 0.5em;  
 }
 
-/* CSS Grid 自動多段 */
+/* CSS Grid 自動多段 (grid-columns) */
 .marp-theme-beam section.grid-columns,
 .marp-theme-custom-beamer-split section.grid-columns {
   display: grid !important;  
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important; :contentReference[oaicite:6]{index=6}  
   gap: 1em !important;  
   padding: 0.5em;  
 }
