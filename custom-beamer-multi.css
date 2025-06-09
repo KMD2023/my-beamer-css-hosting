@@ -1,32 +1,79 @@
 /* @theme custom-beamer-multi */
-/* 1) beamer.css を先に読み込み（ビジュアルベース） */  
-@import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css"; 
+/* 1) beamer.css を最初に読み込む（ビジュアル基盤） */
+@import "https://raw.githubusercontent.com/rnd195/my-marp-themes/main/beamer.css";
 
-:root {
-  --fw: 1;
+/* 2) default テーマを次に読み込む（レイアウト基盤） */
+@import 'default';
+
+/* ====================================================
+   ■ 分割レイアウト用ユーティリティ（テーマクラス指定）
+   ==================================================== */
+
+/* 左右分割 */
+.marp-theme-beam section.split-horizontal,
+.marp-theme-custom-beamer-split section.split-horizontal {
+  display: flex !important;        /* Flexbox 有効化 */  
+  flex-direction: row !important;  /* 横方向 */  
+  width: 100%; height: 100%;       /* 全体を覆う */  
 }
-/* ----- レイアウト ----- */
-.flex{
-  display: flex;
-  gap: 1em;
+.marp-theme-beam section.split-horizontal > *,
+.marp-theme-custom-beamer-split section.split-horizontal > * {
+  flex: 1 1 50% !important;        /* 左右それぞれ半分 */  
+  box-sizing: border-box;  
+  padding: 1em;  
 }
-.sa {
-  justify-content: space-around;
-  /* border: 8px dashed rgb(15, 166, 226);
-  background-color: rgb(222, 244, 255); */
+
+/* 上下分割 */
+.marp-theme-beam section.split-vertical,
+.marp-theme-custom-beamer-split section.split-vertical {
+  display: flex !important;  
+  flex-direction: column !important;  /* 縦方向 */  
+  width: 100%; height: 100%;  
 }
-.sb {
-  justify-content: space-between;
-  /* border: 8px dashed rgb(21, 17, 255);
-  background-color: rgb(222, 244, 255); */
+.marp-theme-beam section.split-vertical > *,
+.marp-theme-custom-beamer-split section.split-vertical > * {
+  flex: 1 1 50% !important;        /* 上下それぞれ半分 */  
+  box-sizing: border-box;  
+  padding: 1em;  
 }
-.sa div,.sb div{
-  margin: 0.1em;
-  /* border: 8px dashed rgb(80, 177, 109);
-  background-color: rgb(227, 250, 237); */
+
+/* 四分割 */
+.marp-theme-beam section.split-quad,
+.marp-theme-custom-beamer-split section.split-quad {
+  display: grid !important;  
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr) !important;  /* 2×2 */  
+  width: 100%; height: 100%;  
+  gap: 1em !important;           /* セル間ギャップ */  
 }
-.fw div{
-  flex: var(--fw);
-  /* background-color: rgb(244, 238, 255);
-  border: 8px dashed rgb(93, 0, 255); */
-}/* ---------- */
+.marp-theme-beam section.split-quad > *,
+.marp-theme-custom-beamer-split section.split-quad > * {
+  box-sizing: border-box;  
+  padding: 1em;  
+}
+
+/* ====================================================
+   ■ 既存 columns/grid 定義の優先度強化
+   ==================================================== */
+
+/* Flexbox 2 列 */
+.marp-theme-beam section.columns,
+.marp-theme-custom-beamer-split section.columns {
+  display: flex !important;  
+  flex-wrap: wrap !important;  
+  gap: 1em !important;        /* 列間ギャップ */  
+}
+.marp-theme-beam section.columns > *,
+.marp-theme-custom-beamer-split section.columns > * {
+  flex: 1 1 48% !important;   /* 最小幅 48% */  
+  box-sizing: border-box;  
+  padding: 0.5em;  
+}
+
+/* CSS Grid 自動多段 */
+.marp-theme-beam section.grid-columns,
+.marp-theme-custom-beamer-split section.grid-columns {
+  display: grid !important;  
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 1em !important;  
+  padding: 0.5em;  
+}
